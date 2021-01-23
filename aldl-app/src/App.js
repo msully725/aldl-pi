@@ -1,13 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [state, setState] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3010/log/latest")
+      .then(response => response.text())
+      .then(text => { 
+        console.log(text);
+        setState(text);
+      }
+    )
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          State: {state}
         </p>
         <a
           className="App-link"

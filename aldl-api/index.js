@@ -1,7 +1,10 @@
 import express from 'express';
 import readLastLines from 'read-last-lines';
+import cors from 'cors';
 const app = express();
-const port = 3000;
+const port = 3010;
+
+app.use(cors());
 
 const logFilePath = "../aldl-samplelog/sampleOutput.log"
 
