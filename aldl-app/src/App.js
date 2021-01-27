@@ -23,13 +23,22 @@ function useInterval(callback, delay) {
 }
 
 function App() {
-  const [state, setState] = useState([]);
+  const [state, setState] = useState({});
+
+  const convertLogCsvToObject= (csvRow) => {
+    const csvSplit = csvRow.split(',');
+
+    return {
+      "RPM": csvSplit[0]
+    };
+  }
 
   function fetchLatestLog() {
     fetch("http://localhost:3010/log/latest")
       .then(response => response.text())
       .then(text => { 
-        setState(text);
+        const logObject = convertLogCsvToObject(text);
+        setState(logObject);
       }
     )
   }
@@ -43,7 +52,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          State: {state}
+          RPM: {state.RPM}
         </p>
         <a
           className="App-link"
