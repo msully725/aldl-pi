@@ -29,7 +29,27 @@ function App() {
     const csvSplit = csvRow.split(',');
 
     return {
-      "RPM": csvSplit[0]
+      "RPM": csvSplit[0],
+      "TPS": csvSplit[1],
+      "MAP": csvSplit[2],
+      "SparkAdvance": csvSplit[3],
+      "MAF": csvSplit[4],
+      "LeftTrim": csvSplit[5],
+      "RightTrim": csvSplit[6],
+      "RightOxygen": csvSplit[11],
+      "LeftOxygen": csvSplit[12],
+      "ClosedLoop": csvSplit[13],
+      "PowerEnrichment": csvSplit[14],
+      "IAC": csvSplit[16],
+      "IAT": csvSplit[18],
+      "CoolantTemp": csvSplit[19],
+      "KnockRetard": csvSplit[20],
+      "KnockCount": csvSplit[21],
+      "VehicleSpeed": csvSplit[22],
+      "Voltage": csvSplit[23],
+      "BlockLearnCell": csvSplit[29],
+      "BarometricPressure": csvSplit[32],
+      "TCC": csvSplit[35],
     };
   }
 
@@ -49,20 +69,11 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          RPM: {state.RPM}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {Object.keys(state).map(dataPointKey => 
+        <div>
+          {dataPointKey}: {state[dataPointKey]}
+        </div>
+      )}
     </div>
   );
 }
