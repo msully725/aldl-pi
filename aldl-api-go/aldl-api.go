@@ -6,12 +6,14 @@ import (
 	"net/http"
 )
 
+const port int = 3010
+
 func main() {
 	http.HandleFunc("/log/latest", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Request!")
 	})
 
-	fmt.Println("aldl-api listening at http://localhost:3010")
-
-	log.Fatal(http.ListenAndServe(":3010", nil))
+	listenAddress := fmt.Sprintf(":%d", port)
+	fmt.Println("aldl-api listening at http://localhost" + listenAddress)
+	log.Fatal(http.ListenAndServe(listenAddress, nil))
 }
