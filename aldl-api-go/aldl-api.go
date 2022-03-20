@@ -1,7 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
 
 func main() {
-	fmt.Println("Hello ALDL API!")
+	http.HandleFunc("/log/latest", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Request!")
+	})
+
+	fmt.Println("aldl-api listening at http://localhost:3010")
+
+	log.Fatal(http.ListenAndServe(":3010", nil))
 }
