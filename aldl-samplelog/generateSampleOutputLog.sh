@@ -1,2 +1,2 @@
 #! /bin/bash
-nodejs index.js | tee sampleOutput.log
+node index.js | tee sampleOutput.log
