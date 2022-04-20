@@ -36,6 +36,8 @@ func getLastLineWithSeek(filePath string) string {
 	var cursor int64 = 0
 	stat, _ := f.Stat()
 	size := stat.Size()
+	var lineFeed byte = 10
+	var carriageReturn byte = 13
 	for {
 		cursor -= 1
 		f.Seek(cursor, io.SeekEnd)
@@ -43,13 +45,13 @@ func getLastLineWithSeek(filePath string) string {
 		c := make([]byte, 1)
 		f.Read(c)
 
-		var newLine byte = 10
-		var carriageReturn byte = 13
-		if cursor != -1 && (c[0] == newLine || c[0] == byte(carriageReturn)) {
+		if cursor != -1 && c[0] == lineFeed {
 			break
 		}
 
-		line = fmt.Sprintf("%s%s", string(c), line)
+		if c[0] != carriageReturn {
+			line = fmt.Sprintf("%s%s", string(c), line)
+		}
 
 		if cursor == -size {
 			break
