@@ -36,8 +36,8 @@ func getLastLineWithSeek(filePath string) string {
 	var cursor int64 = 0
 	stat, _ := f.Stat()
 	size := stat.Size()
-	var lineFeed byte = 10
-	var carriageReturn byte = 13
+	const lineFeed byte = 10
+	const carriageReturn byte = 13
 	for {
 		cursor -= 1
 		f.Seek(cursor, io.SeekEnd)
